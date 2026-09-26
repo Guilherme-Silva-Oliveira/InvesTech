@@ -88,7 +88,7 @@ CREATE TABLE proposta (
     nome_ativo VARCHAR(255) NOT NULL,
     tipo_operacao VARCHAR(50) NOT NULL,
     quantidade_sugerida DECIMAL(10,2) NOT NULL,
-    valor_suregido DECIMAL(10,2) NOT NULL,
+    valor_sugerido DECIMAL(10,2) NOT NULL,
     descricao_proposta VARCHAR(255),
     nivel_risco INT,
     data_proposta DATETIME,
@@ -128,3 +128,15 @@ CREATE TABLE operacao (
     CONSTRAINT fk_operacao_decisao FOREIGN KEY (decisao_id) REFERENCES decisao(id),
 	CONSTRAINT fk_operacao_ativo FOREIGN KEY (ativo_id) REFERENCES ativo(id)
 );
+
+-- SELECTS DAS TABELAS
+SELECT * FROM usuario;
+SELECT * FROM conta;
+SELECT * FROM carteira;
+SELECT * FROM ativo;
+SELECT * FROM parametro;
+SELECT * FROM posicao;
+SELECT * FROM movimentacao;
+SELECT * FROM proposta;
+SELECT * FROM decisao;
+SELECT * FROM operacao;

@@ -25,5 +25,4 @@ public class Proposta {
     private Integer nivelRisco;
     private LocalDateTime dataProposta;
     private LocalDateTime dataRetorno;
-    private String statusProposta;
-}
+    private String statusProposta;}
