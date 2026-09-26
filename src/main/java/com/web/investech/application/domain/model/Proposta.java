@@ -17,6 +17,7 @@ public class Proposta {
     private Integer id;
 
     private String tipoAtivo;
+    private String nomeAtivo;
     private String tipoOperacao;
     private Double quantidadeSugerida;
     private Double valorSugerido;
