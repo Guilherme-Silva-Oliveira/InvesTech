@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface AtivoPort {
     Ativo registrarAtivo(Ativo ativo);
     Optional<Ativo> findById(Integer id);
+    Optional<Ativo> findByNome(String nome);
 
 }

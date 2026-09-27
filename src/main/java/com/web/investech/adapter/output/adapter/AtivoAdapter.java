@@ -25,4 +25,9 @@ public class AtivoAdapter implements AtivoPort {
     public Optional<Ativo> findById(Integer id) {
         return repository.findById(id);
     }
+
+    @Override
+    public Optional<Ativo> findByNome(String nome) {
+        return repository.findByNome(nome);
+    }
 }
