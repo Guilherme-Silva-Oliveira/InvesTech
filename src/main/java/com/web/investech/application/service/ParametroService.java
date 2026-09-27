@@ -4,6 +4,7 @@ import com.web.investech.adapter.input.dto.ativo.AtivoRequest;
 import com.web.investech.adapter.input.dto.mapper.AtivoMapper;
 import com.web.investech.adapter.input.dto.mapper.ParametroMapper;
 import com.web.investech.adapter.input.dto.parametro.ParametroRequest;
+import com.web.investech.adapter.output.mq.ParametroProducer;
 import com.web.investech.application.domain.enums.tipo.TipoAtivo;
 import com.web.investech.application.domain.model.Ativo;
 import com.web.investech.application.domain.model.Carteira;
@@ -23,6 +24,7 @@ public class ParametroService {
     private final ParametroPort parametroPort;
     private final CarteiraPort carteiraPort;
     private final AtivoPort ativoPort;
+    private final ParametroProducer producer;
 
     public Parametro registrarParametro(ParametroRequest request){
         try {
@@ -32,7 +34,9 @@ public class ParametroService {
             Parametro p = ParametroMapper.toEntity(request, tipoAtivo);
             p.setCarteira(carteira);
             p.setDataEnviado(LocalDateTime.now());
-            return parametroPort.registrarParametro(p);
+            Parametro saved = parametroPort.registrarParametro(p);
+            producer.send(saved);
+            return saved;
 
         } catch (Exception e) {
             throw new IllegalArgumentException("Tipo de ativo ou operação inválido: " + e.getMessage());
