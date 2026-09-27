@@ -1,0 +1,37 @@
+package com.web.investech.application.domain.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
+public class Operacao {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String tipoOperacao;
+    private Double quantidade;
+    private Double valorOperacao;
+    private String statusOperacao;
+    private LocalDateTime dataOperacao;
+
+    @ManyToOne @JoinColumn(name = "carteira_id")
+    private Carteira carteira;
+
+    @ManyToOne
+    @JoinColumn(name = "proposta_id")
+    private Proposta proposta;
+
+    @ManyToOne @JoinColumn(name = "decisao_id")
+    private Decisao decisao;
+
+    @ManyToOne @JoinColumn(name = "ativo_id")
+    private Ativo ativo;
+}
