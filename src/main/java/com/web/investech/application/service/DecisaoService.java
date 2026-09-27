@@ -1,11 +1,9 @@
 package com.web.investech.application.service;
 
-import com.web.investech.adapter.input.dto.ativo.AtivoRequest;
 import com.web.investech.adapter.input.dto.decisao.DecisaoRequest;
-import com.web.investech.adapter.input.dto.mapper.AtivoMapper;
 import com.web.investech.adapter.input.dto.mapper.DecisaoMapper;
+import com.web.investech.adapter.output.mq.DecisaoProducer;
 import com.web.investech.application.domain.enums.status.StatusOperacao;
-import com.web.investech.application.domain.enums.tipo.TipoAtivo;
 import com.web.investech.application.domain.enums.tipo.TipoOperacao;
 import com.web.investech.application.domain.model.*;
 import com.web.investech.application.exception.EntidadeInvalidaException;
@@ -13,7 +11,6 @@ import com.web.investech.application.port.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -25,6 +22,7 @@ public class DecisaoService {
     private final DecisaoPort decisaoPort;
     private final AtivoPort ativoPort;
     private final OperacaoPort operacaoPort;
+    private final DecisaoProducer producer;
 
     public Decisao registrarDecisao(DecisaoRequest request){
         try {
@@ -39,7 +37,9 @@ public class DecisaoService {
             proposta.setStatusProposta(StatusOperacao.ACEITA.getDescricao());
             proposta.setDataRetorno(LocalDateTime.now());
             Decisao saved = decisaoPort.registrarDecisao(d);
+            producer.send(saved);
             registrarOperacao(saved);
+
             return saved;
 
         } catch (Exception e) {

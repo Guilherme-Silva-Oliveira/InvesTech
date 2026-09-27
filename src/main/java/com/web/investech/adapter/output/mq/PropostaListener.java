@@ -4,7 +4,6 @@ import com.web.investech.adapter.input.dto.mq.PropostaMessage;
 import com.web.investech.application.service.PropostaService;
 import com.web.investech.config.RabbitMQConfig;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
