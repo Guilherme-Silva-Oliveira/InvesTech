@@ -21,7 +21,7 @@ public class PropostaService {
             Proposta p = PropostaMapper.newProposta(message,tipoAtivo,tipoOperacao);
             return propostaPort.registrarProposta(p);
 
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Tipo de ativo ou operação inválido: " + e.getMessage());
         }
     }

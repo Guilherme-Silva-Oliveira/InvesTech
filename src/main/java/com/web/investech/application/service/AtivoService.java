@@ -30,7 +30,7 @@ public class AtivoService {
             ativo.setStatusAtivo(true);
             return ativoPort.registrarAtivo(ativo);
 
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Tipo de ativo ou operação inválido: " + e.getMessage());
         }
     }
